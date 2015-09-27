@@ -28,11 +28,11 @@ gulp.task('style', function(){
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(less())
     .pipe(autoprefixer())
-    /*.pipe(uncss({
+    .pipe(uncss({
         html: ['*.html'],
         ignore: ['.active', '.open']
-    }))*/
-    //.pipe(minifyCSS())
+    }))
+    .pipe(minifyCSS())
     .pipe(rename("style.min.css"))
     .pipe(gulp.dest('./dist/css'));
 });

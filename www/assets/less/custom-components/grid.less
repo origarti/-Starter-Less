@@ -1,0 +1,153 @@
+// Grid Containers
+
+@nbColumns: 12;
+@gutter: 15px;
+
+@mobile-container: 620px;
+@tablet-container: 748px;
+@desktop-container: 940px;
+@xl-container: 1180px;
+
+// Responsive Breakpoints
+@mobile-breakpoint:                             (@mobile-container + 20);
+@tablet-breakpoint:                             (@tablet-container + 20);
+@desktop-breakpoint:                            (@desktop-container + 20);
+@xl-breakpoint:                                 (@xl-container + 20);
+
+
+// Micro Clearfix - http://nicolasgallagher.com/micro-clearfix-hack/
+.clear:before, .clear:after { content: " "; display: table; } .clear:after { clear: both; }
+.row:before, .row:after { content: ""; display: table; } .row:after { clear: both; }
+
+.row {
+  position: relative;
+  margin-left: -@gutter;
+  margin-right: -@gutter;
+}
+
+.container {
+  padding-left: @gutter;
+  padding-right: @gutter;
+  margin-left: auto;
+  margin-right: auto;
+}
+.full-width {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.col{
+  position: relative;
+  float: left;
+  padding-left: @gutter;
+  padding-right: @gutter;
+  &.np{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+
+
+.container{
+  max-width: @mobile-container;
+}
+
+.mixin-sm-columns (@index) when (@index > 0) {
+  .sm-@{index}{
+    width: (@index / @nbColumns) * 100%;
+  }
+  .sm-push-@{index}{
+    left: (@index / @nbColumns) * 100%;
+  }
+  .sm-pull-@{index}{
+    left: -(@index / @nbColumns) * 100%;
+  }
+  .mixin-sm-columns(@index - 1);
+}
+.mixin-sm-columns(@nbColumns);  
+
+
+.hide-lg, .hide-xl, .show-sm, .show-md { display: block; }
+.hide-sm, .show-lg, .show-xl { display: none; }
+
+@media only screen and (min-width: @tablet-breakpoint) {
+    .container{
+        max-width: @tablet-container;
+    }
+   .mixin-md-columns (@index) when (@index > 0) {
+      .md-@{index}{
+        width: (@index / @nbColumns) * 100%;
+      }
+      .md-push-@{index}{
+        left: (@index / @nbColumns) * 100%;
+      }
+      .md-pull-@{index}{
+        left: -(@index / @nbColumns) * 100%;
+      }
+      .mixin-md-columns(@index - 1);
+    } 
+    .mixin-md-columns(@nbColumns);
+
+    .show-sm, .hide-md{display: none;}
+    .show-md{display: block;}
+    .md-no-padding { padding: 0; }
+    .md-no-push, .md-no-pull { left: 0; }
+}
+
+@media only screen and (min-width: @desktop-breakpoint) {
+    .container{
+        max-width: @desktop-container;
+    }
+
+   .mixin-lg-columns (@index) when (@index > 0) {
+      .lg-@{index}{
+        width: (@index / @nbColumns) * 100%;
+      }
+      .lg-push-@{index}{
+        left: (@index / @nbColumns) * 100%;
+      }
+      .lg-pull-@{index}{
+        left: -(@index / @nbColumns) * 100%;
+      }
+
+      .mixin-lg-columns(@index - 1);
+    } 
+    .mixin-lg-columns(@nbColumns);
+
+    .show-sm, .show-md, .hide-lg {display: none;}
+    .show-lg{display: block;}
+    .lg-no-padding { padding: 0; }
+    .lg-no-push, .lg-no-pull { left: 0; }
+}
+@media only screen and (min-width: @xl-breakpoint) {
+    .container{
+        max-width: @xl-container;
+    }
+
+   .mixin-xl-columns (@index) when (@index > 0) {
+      .xl-@{index}{
+        width: (@index / @nbColumns) * 100%;
+      }
+      .xl-push-@{index}{
+        left: (@index / @nbColumns) * 100%;
+      }
+      .xl-pull-@{index}{
+        left: -(@index / @nbColumns) * 100%;
+      }
+      
+      .mixin-xl-columns(@index - 1);
+    } 
+    .mixin-xl-columns(@nbColumns);
+
+
+    .show-sm, .show-md, .show-lg, .hide-xl{display: none;}
+    .show-xl{display: block;}
+    .xl-no-padding { padding: 0; }
+    .xl-no-push, .xl-no-pull { left: 0; }
+}
+
+
